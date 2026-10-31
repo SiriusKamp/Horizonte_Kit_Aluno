@@ -1,7 +1,7 @@
 familia,estrutura,operacao,consulta_dominante,garantia,crescimento,custo_operacional,limitacao
-relacional,,,,,,,
-documentos,,,,,,,
-chave-valor,,,,,,,
-grafos,,,,,,,
-series-temporais,,,,,,,
-vetorial,,,,,,,
+relacional,"Tabelas relacionadas por chaves primárias e estrangeiras","Cadastro e atualização de clientes, produtos, pedidos e itens de pedidos","Consultas SQL com JOIN, filtros, agregações e relacionamentos","Consistência referencial e transações ACID","Crescimento de registros e volume de transações, com necessidade de índices e otimização de consultas","Médio
+documentos,"Documentos semelhantes a JSON, com campos e atributos que podem variar entre registros","Armazenamento e consulta de características dinâmicas de produtos, como volumes, dimensões, tags e especificações","Busca por campos e atributos, inclusive aninhados, além da recuperação do documento para detalhamento do produto","Pode oferecer atomicidade nas operações sobre um único documento
+chave-valor,"Pares de chave única e valor, que pode armazenar texto, dados serializados ou estruturas suportadas pelo sistema","Armazenamento e recuperação rápida de sessões, tokens e dados temporários de cache","Acesso direto pelo identificador da chave, com operações de leitura, escrita e expiração por TTL","Depende do sistema
+grafos,"Nós representam entidades e arestas representam relacionamentos entre elas, podendo conter propriedades","Representação e exploração de relações entre clientes, produtos, vendedores, interesses e concorrentes","Travessia de relacionamentos e busca de caminhos, vizinhos e conexões entre entidades","Depende do banco
+series-temporais,"Registros de medições ou eventos associados a instantes de tempo, normalmente com identificadores e valores","Armazenamento de métricas, latências, eventos e logs para acompanhar o comportamento dos serviços ao longo do tempo","Filtros por intervalo temporal, agrupamentos por janelas e agregações como média, máximo e percentis","Depende do sistema
+vetorial,"Vetores numéricos de dimensão definida, armazenados como embeddings associados a produtos ou outros objetos","Recuperação de itens semelhantes por proximidade entre embeddings, por exemplo para busca semântica e recomendação de produtos","Ordenação por distância ou similaridade entre vetores, podendo utilizar índices de busca aproximada","A distância mede proximidade no espaço vetorial, não probabilidade nem adequação comercial
