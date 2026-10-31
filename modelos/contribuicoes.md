@@ -1,12 +1,6 @@
 # Contribuições
 
-Grupo, integrantes e commit:
+Trabalho individual. 
 
-Para cada integrante:
-
-- Atividade concreta realizada.
-- Arquivo, teste ou resultado em que trabalhou.
-- Explicação de uma evidência em 80–120 palavras.
-- Uma limitação que identificou.
-
-A execução pode ocorrer na máquina de um integrante; identificar quem executou e quem analisou. Não criar uma prova adicional.
+Commit inicial : Subida do repositorio 
+Commit 2, T1 Realizado com as evidencias nos periodos de 20261030 até o começo de 20261031 Feito E1-E5

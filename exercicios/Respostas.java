@@ -1,7 +1,8 @@
 import java.util.*;
 public class Respostas {
+    
  public static String catalogoSql(){ // TODO_ALUNO T1 E4: placeholders ? categoria, minimo, maximo
-  throw new UnsupportedOperationException("TODO_ALUNO catalogoSql");
+    return "SELECT id,nome,preco_atual FROM produto WHERE categoria=? AND preco_atual BETWEEN ? AND ?";
  }
  public static String modulo(long h,List<String> nodes){ // TODO_ALUNO T2 E1: long SEM SINAL
   throw new UnsupportedOperationException("TODO_ALUNO modulo");

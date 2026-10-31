@@ -25,8 +25,12 @@ public class App {
  static Object one(Connection c,String sql,Object...args)throws Exception{return q(c,sql,args).get(0).get(0);}
  static void log(String text){System.out.println(Instant.now()+" "+text);}
  static void catalog(String[]a)throws Exception{
-  BigDecimal lo=new BigDecimal(a[1]),hi=new BigDecimal(a[2]);if(lo.signum()<0||lo.compareTo(hi)>0)throw new IllegalArgumentException("Faixa inválida");
-  try(Connection c=db(System.getenv().getOrDefault("DB_HOST","basic"),"horizonte")){log("colunas=id,nome,preco_atual linhas="+q(c,Respostas.catalogoSql(),a[0],lo,hi));c.commit();}
+  BigDecimal lo=new BigDecimal(a[1]),
+  hi=new BigDecimal(a[2]);
+  if(lo.signum()<0||lo.compareTo(hi)>0)throw new IllegalArgumentException("Faixa inválida");
+  try(Connection c=db(System.getenv().getOrDefault("DB_HOST","basic"),"horizonte"))
+  {log("colunas=id,nome,preco_atual linhas="+q(c,Respostas.catalogoSql(),a[0],lo,hi))
+  ;c.commit();}
  }
  public record Point(long hash,String node,int virtual){}
  static long hash(String s)throws Exception{return ByteBuffer.wrap(MessageDigest.getInstance("SHA-256").digest(s.getBytes(StandardCharsets.UTF_8))).getLong();}
