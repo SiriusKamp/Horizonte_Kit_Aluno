@@ -33,19 +33,34 @@ public class App {
   ;c.commit();}
  }
  public record Point(long hash,String node,int virtual){}
+
  static long hash(String s)throws Exception{return ByteBuffer.wrap(MessageDigest.getInstance("SHA-256").digest(s.getBytes(StandardCharsets.UTF_8))).getLong();}
+ 
  static Map<String,String> distribution(String names,String mode)throws Exception{
   List<String> nodes=names.chars().mapToObj(c->String.valueOf((char)c)).sorted().toList();List<Point> points=new ArrayList<>();
+  
   for(String n:nodes)for(int i=0;i<(mode.equals("virtual")?16:1);i++)points.add(new Point(hash(String.format(Locale.ROOT,"N:%s:%02d",n,i)),n,i));
+  
   points.sort((a,b)->{int c=Long.compareUnsigned(a.hash(),b.hash());if(c!=0)return c;c=a.node().compareTo(b.node());return c!=0?c:Integer.compare(a.virtual(),b.virtual());});
   Map<String,String> out=new LinkedHashMap<>();
-  for(int i=0;i<1000;i++){String k=String.format(Locale.ROOT,"K:%04d",i);String n=mode.equals("faixa")?(i<=333?"A":i<=666?"B":"C"):mode.equals("modulo")?Respostas.modulo(hash(k),nodes):Respostas.sucessor(hash(k),points);out.put(k,n);}return out;
+  for(int i=0;i<1000;i++)
+    {String k=String.format(Locale.ROOT,"K:%04d",i);
+  String n=mode.equals("faixa")?(i<=333?"A":i<=666?"B":"C"):
+  mode.equals("modulo")?Respostas.modulo(hash(k),nodes):Respostas.sucessor(hash(k),points);
+  out.put(k,n);
+  }
+  return out;
  }
  static void shard(String dir)throws Exception{
   Files.createDirectories(Path.of(dir));
+
   for(String mode:List.of("faixa","modulo","anel","virtual")){
-   Map<String,String>a=distribution("ABC",mode),b=mode.equals("faixa")?a:distribution("ABCD",mode);StringBuilder csv=new StringBuilder("chave,antes,depois\n");
-   Map<String,Integer> counts=new TreeMap<>();for(String k:a.keySet()){csv.append(k+","+a.get(k)+","+b.get(k)+"\n");counts.merge(b.get(k),1,Integer::sum);}
+   Map<String,String>a=distribution("ABC",mode)
+   ,b=mode.equals("faixa")?
+   a   :   distribution("ABCD",mode);
+   StringBuilder csv=new StringBuilder("chave,antes,depois\n");
+   Map<String,Integer> counts=new TreeMap<>();
+   for(String k:a.keySet()){csv.append(k+","+a.get(k)+","+b.get(k)+"\n");counts.merge(b.get(k),1,Integer::sum);}
    Files.writeString(Path.of(dir,mode+".csv"),csv,StandardCharsets.UTF_8);long moved=Respostas.movidas(a,b);
    log("SIMULADO modo="+mode+" depois="+counts+" menor="+Collections.min(counts.values())+" maior="+Collections.max(counts.values())+" movidas="+moved+" percentual="+(moved/10.0));
   }
